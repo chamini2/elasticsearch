@@ -20,7 +20,6 @@
 package org.elasticsearch.common.geo;
 
 import org.apache.lucene.geo.Rectangle;
-import org.apache.lucene.spatial.prefix.tree.GeohashPrefixTree;
 import org.apache.lucene.spatial.prefix.tree.QuadPrefixTree;
 import org.apache.lucene.util.SloppyMath;
 import org.elasticsearch.ElasticsearchParseException;
@@ -200,7 +199,7 @@ public class GeoUtils {
         assert meters >= 0;
 
         if(meters == 0) {
-            return GeohashPrefixTree.getMaxLevelsPossible();
+            return GeoHashUtils.PRECISION;
         } else {
             final double ratio = 1+(EARTH_POLAR_DISTANCE / EARTH_EQUATOR); // cell ratio
             final double width = Math.sqrt((meters*meters)/(ratio*ratio)); // convert to cell width
